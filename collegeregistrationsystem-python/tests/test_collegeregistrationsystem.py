@@ -3,6 +3,7 @@ import unittest
 from src.collegeregistrationsystem import CollegeRegistrationSystem
 from src.coursealreadyexistsexception import CourseAlreadyExistsException
 from src.coursenotfoundexception import CourseNotFoundException
+from src.collegemember import CollegeMember
 
 from tests.constants import STUDENT_FIRST_ID
 from tests.constants import STUDENT_1_FIRSTNAME_VALID
@@ -64,8 +65,27 @@ class CollegeRegistrationSystemTest(unittest.TestCase):
         self.add_student_succeeds_helper()
 
     def test_get_college_member_succeeds(self):
-        # TODO
-        self.fail("Not implemented yet.")
+        # Add a student.
+        student1 = self.college_registration_system.add_student(STUDENT_1_FIRSTNAME_VALID, STUDENT_1_LASTNAME_VALID, STUDENT_1_DATEOFBIRTH_VALID, STUDENT_1_EMAILADDRESS_VALID, STUDENT_1_HOMEADDRESS_VALID)
+
+        # Attempt to get the student.
+        student1pointer: CollegeMember = self.college_registration_system.get_college_member(student1.get_id())
+
+        # Try getting the student info.
+        try:
+            self.assertIsNotNone(student1pointer)
+            self.assertEqual(student1pointer.get_id(), STUDENT_FIRST_ID)
+            self.assertEqual(student1pointer.get_first_name(), STUDENT_1_FIRSTNAME_VALID)
+            self.assertEqual(student1pointer.get_last_name(), STUDENT_1_LASTNAME_VALID)
+            self.assertEqual(student1pointer.get_email_address(), STUDENT_1_EMAILADDRESS_VALID)
+            # I don't know what else to add.
+            return student1pointer
+        except TypeError:
+            # If this error was raised, then the get_college_menber() function did not work correctly.
+            self.fail()
+            return None
+            
+
 
     def test_get_college_member_reports_collegemembernotfound(self):
         # TODO
