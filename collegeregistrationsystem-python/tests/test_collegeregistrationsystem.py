@@ -1,6 +1,7 @@
 import unittest
 
 from src.collegeregistrationsystem import CollegeRegistrationSystem
+from src.collegemembernotfoundexception import CollegeMemberNotFoundException
 from src.coursealreadyexistsexception import CourseAlreadyExistsException
 from src.coursenotfoundexception import CourseNotFoundException
 from src.collegemember import CollegeMember
@@ -88,8 +89,10 @@ class CollegeRegistrationSystemTest(unittest.TestCase):
 
 
     def test_get_college_member_reports_collegemembernotfound(self):
-        # TODO
-        self.fail("Not implemented yet.")
+        # The easiest way is for a college system that's currently empty.
+        # Query a student whose ID is larger than the length (0).
+        with self.assertRaises(CollegeMemberNotFoundException):
+            self.college_registration_system.get_college_member(2)
 
     def test_add_course_violates_preconditions(self):
 		# Call the unit under test
