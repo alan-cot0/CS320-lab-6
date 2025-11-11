@@ -5,6 +5,7 @@ from src.collegemembernotfoundexception import CollegeMemberNotFoundException
 from src.coursealreadyexistsexception import CourseAlreadyExistsException
 from src.coursenotfoundexception import CourseNotFoundException
 from src.collegemember import CollegeMember
+from src.course import Course, CourseSection
 
 from tests.constants import STUDENT_FIRST_ID
 from tests.constants import STUDENT_1_FIRSTNAME_VALID
@@ -228,8 +229,12 @@ class CollegeRegistrationSystemTest(unittest.TestCase):
         self.add_course_section_succeeds_helper()
 
     def test_enroll_returns_true(self):
-        # TODO
-        self.fail("Not implemented yet.")
+        student = self.college_registration_system.add_student(STUDENT_1_FIRSTNAME_VALID, STUDENT_1_LASTNAME_VALID, STUDENT_1_DATEOFBIRTH_VALID
+                                                     , STUDENT_1_EMAILADDRESS_VALID, STUDENT_1_HOMEADDRESS_VALID)
+        studentID = student.get_id()
+        course_section1 = self.add_course_section_succeeds_helper().get_section_number()
+        course1 = self.college_registration_system.get_course_listing()[0].get_id()
+        self.assertTrue(self.college_registration_system.enroll(course1, course_section1, studentID))
 	
     def test_enroll_returns_false(self):
         # TODO
