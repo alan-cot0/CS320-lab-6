@@ -93,6 +93,11 @@ class CollegeRegistrationSystemTest(unittest.TestCase):
         # Query a student whose ID is larger than the length (0).
         with self.assertRaises(CollegeMemberNotFoundException):
             self.college_registration_system.get_college_member(2)
+        self.college_registration_system.add_student(STUDENT_1_FIRSTNAME_VALID, STUDENT_1_LASTNAME_VALID, STUDENT_1_DATEOFBIRTH_VALID
+                                                     , STUDENT_1_EMAILADDRESS_VALID, STUDENT_1_HOMEADDRESS_VALID)
+        # Adding one student to the mix should still give the same error.
+        with self.assertRaises(CollegeMemberNotFoundException):
+            self.college_registration_system.get_college_member(2)
 
     def test_add_course_violates_preconditions(self):
 		# Call the unit under test
