@@ -244,13 +244,6 @@ class CollegeRegistrationSystemTest(unittest.TestCase):
         # The only feasible way the unsuccessful enrollment returns False instead of an error is if the student is already enrolled.
         
         self.college_registration_system.enroll(course, course_section, studentID)
-        # This will make 3 more students.
-        """
-        for i in range(2, COURSE_1_COURSESECTION_1_ENROLLMENTCAP_VALID + 2):
-            scholar = self.college_registration_system.add_student("Ava", "Cogan", STUDENT_1_DATEOFBIRTH_VALID,
-                                                         "example@agar.io", "1 Campus Center Way")
-            self.college_registration_system.enroll(course, course_section, scholar.get_id())
-        """
         self.assertFalse(self.college_registration_system.enroll(course, course_section, studentID))
         
             
