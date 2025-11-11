@@ -245,12 +245,23 @@ class CollegeRegistrationSystemTest(unittest.TestCase):
         
         self.college_registration_system.enroll(course, course_section, studentID)
         self.assertFalse(self.college_registration_system.enroll(course, course_section, studentID))
-        
             
     def test_drop_returns_true(self):
         # TODO
-        self.fail("Not implemented yet.")
+        student1 = self.college_registration_system.add_student(STUDENT_1_FIRSTNAME_VALID, STUDENT_1_LASTNAME_VALID, STUDENT_1_DATEOFBIRTH_VALID, STUDENT_1_EMAILADDRESS_VALID, STUDENT_1_HOMEADDRESS_VALID)
+
+        course1 = self.college_registration_system.add_course("Some_course", 1)
+        course1section = course1.add_course_section(10)
+
+        course1section.enroll(student1)
+
+        self.assertEqual(course1section.drop(student1), True)
 
     def test_drop_returns_false(self):
         # TODO
-        self.fail("Not implemented yet.")
+        student1 = self.college_registration_system.add_student(STUDENT_1_FIRSTNAME_VALID, STUDENT_1_LASTNAME_VALID, STUDENT_1_DATEOFBIRTH_VALID, STUDENT_1_EMAILADDRESS_VALID, STUDENT_1_HOMEADDRESS_VALID)
+
+        course1 = self.college_registration_system.add_course("Some_course", 1)
+        course1section = course1.add_course_section(10)
+
+        self.assertEqual(course1section.drop(student1), False)
