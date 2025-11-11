@@ -237,8 +237,22 @@ class CollegeRegistrationSystemTest(unittest.TestCase):
         self.assertTrue(self.college_registration_system.enroll(course1, course_section1, studentID))
 	
     def test_enroll_returns_false(self):
-        # TODO
-        self.fail("Not implemented yet.")
+        student = self.add_student_succeeds_helper()
+        studentID = student.get_id()
+        course_section = self.add_course_section_succeeds_helper().get_section_number()
+        course = self.college_registration_system.get_course_listing()[0].get_id()
+        # The only feasible way the unsuccessful enrollment returns False instead of an error is if the student is already enrolled.
+        
+        self.college_registration_system.enroll(course, course_section, studentID)
+        # This will make 3 more students.
+        """
+        for i in range(2, COURSE_1_COURSESECTION_1_ENROLLMENTCAP_VALID + 2):
+            scholar = self.college_registration_system.add_student("Ava", "Cogan", STUDENT_1_DATEOFBIRTH_VALID,
+                                                         "example@agar.io", "1 Campus Center Way")
+            self.college_registration_system.enroll(course, course_section, scholar.get_id())
+        """
+        self.assertFalse(self.college_registration_system.enroll(course, course_section, studentID))
+        
             
     def test_drop_returns_true(self):
         # TODO
